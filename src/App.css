@@ -21,15 +21,20 @@ body {
   align-items: center;
   min-height: 100vh;
   background-color: #e2e2e2;
+  /* Đảm bảo không có scroll ngang */
+  overflow-x: hidden; 
 }
 
 .calculator-wrapper {
   padding: 20px;
   position: relative;
+  /* Cho phép wrapper chiếm đủ chỗ để căn giữa */
+  width: 100%; 
 }
 
 .calculator {
-  width: 580px;
+  /* ĐÃ SỬA: Thay 'width' cố định bằng 'max-width' để giới hạn kích thước trên desktop */
+  max-width: 580px; 
   background-color: var(--bg-color);
   border-radius: 12px;
   box-shadow: 0 6px 40px rgba(0, 0, 0, 0.2);
@@ -37,6 +42,8 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
+  /* Căn giữa máy tính trên màn hình lớn */
+  margin: 0 auto; 
 }
 
 .header {
@@ -263,27 +270,59 @@ button.operator:hover {
   transform: scale(0.95);
 }
 
+/* @MEDIA QUERIES - Đảm bảo tính responsive */
 @media (max-width: 520px) {
+  /* Body/Wrapper chiếm toàn bộ không gian trên mobile */
+  body {
+    padding: 0;
+    margin: 0;
+  }
   .calculator-wrapper {
     padding: 0;
     height: 100vh;
     width: 100vw;
   }
+  
+  /* Máy tính chiếm 100% chiều rộng, loại bỏ giới hạn max-width */
   .calculator {
     width: 100%;
+    max-width: none; 
     border-radius: 0;
     height: 100%;
-    max-width: none;
+    box-shadow: none; /* Bỏ shadow trên mobile để trông gọn gàng hơn */
   }
+  
+  /* Điều chỉnh kích thước hiển thị */
+  .display {
+    padding: 20px;
+    min-height: 100px;
+  }
+  
+  .current-operand {
+    font-size: 3.2rem; /* Giảm kích thước chữ hiển thị */
+  }
+
+  /* Điều chỉnh nút bấm */
   button {
-    font-size: 1.8rem;
-    padding: 25px;
+    font-size: 1.6rem; /* Giảm kích thước chữ nút bấm một chút */
+    padding: 22px 0; 
   }
+
+  /* Điều chỉnh lịch sử */
   .history-panel {
-    max-width: 90%;
+    /* Đảm bảo bảng lịch sử vừa vặn trên điện thoại */
+    width: 95%; 
+    max-width: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0; /* Neo vào đáy màn hình */
+    height: 90vh; /* Chiếm phần lớn chiều cao màn hình */
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
 }
 
+/* Các lớp CSS cho kích thước chữ display */
 .current-operand.font-medium {
   font-size: 2.5rem;
 }
