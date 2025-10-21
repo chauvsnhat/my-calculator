@@ -1,0 +1,293 @@
+:root {
+  --bg-color: #f0f2f5; /* Xám nhạt ấm áp */
+  --display-bg: #f5f7fa; /* Nhạt hơn một chút so với bg-color */
+  --button-bg: #e8ecef; /* Xám nhạt với chút xanh */
+  --button-hover-bg: #dfe3e8; /* Tương phản nhẹ khi hover */
+  --operator-bg: #d9e1e8; /* Xám nhạt xanh dương */
+  --operator-hover-bg: #c8d0d9; /* Tương phản khi hover */
+  --equals-bg: #004d99; /* Xanh dương đậm hơn */
+  --equals-hover-bg: #0066cc; /* Xanh dương sáng hơn khi hover */
+  --text-color: #0d0d0d;
+  --sub-text-color: #5d5d5d;
+  --button-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  --history-bg: #e0eaf1; /* Xanh dương nhạt hơn cho lịch sử */
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #e2e2e2;
+}
+
+.calculator-wrapper {
+  padding: 20px;
+  position: relative;
+}
+
+.calculator {
+  width: 580px;
+  background-color: var(--bg-color);
+  border-radius: 12px;
+  box-shadow: 0 6px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: var(--bg-color);
+  border-bottom: 1px solid #ddd;
+  font-size: 1.2rem;
+}
+
+/* Loại bỏ kiểu button mặc định trong header */
+.header button {
+  display: none;
+}
+
+/* Kiểu cho nút lịch sử với Font Awesome */
+.history-toggle {
+  font-size: 1.2rem;
+  padding: 6px 8px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  color: var(--sub-text-color);
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.history-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--text-color);
+  transform: scale(1.1);
+}
+
+.history-toggle:active {
+  transform: scale(0.95);
+}
+
+.display {
+  position: relative;
+  background-color: var(--display-bg);
+  color: var(--text-color);
+  padding: 25px 30px;
+  text-align: right;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-bottom: 1px solid #ddd;
+}
+
+.memory-label {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  font-size: 1rem;
+  color: var(--sub-text-color);
+}
+
+.previous-operand {
+  font-size: 1.5rem;
+  color: var(--sub-text-color);
+  min-height: 30px;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.current-operand {
+  font-size: 3.5rem;
+  font-weight: bold;
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: font-size 0.2s ease-in-out;
+}
+
+.memory-row {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  background-color: var(--bg-color);
+  font-size: 1rem;
+  color: var(--sub-text-color);
+}
+
+.memory-row span {
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.memory-row span:hover {
+  background-color: #e6e6e6;
+  border-radius: 4px;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background-color: #ccc;
+}
+
+button {
+  border: none;
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  font-size: 1.7rem;
+  padding: 28px 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  box-shadow: var(--button-shadow);
+}
+
+button:hover {
+  background-color: var(--button-hover-bg);
+}
+
+button.operator {
+  background-color: var(--operator-bg);
+  font-weight: 500;
+}
+
+button.operator:hover {
+  background-color: var(--operator-hover-bg);
+}
+
+.equals {
+  background-color: var(--equals-bg);
+  color: white;
+}
+
+.equals:hover {
+  background-color: var(--equals-hover-bg);
+}
+
+.history-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.history-panel {
+  background-color: var(--history-bg);
+  border-radius: 8px;
+  padding: 20px;
+  width: 540px;
+  height: 500px;
+  max-height: 100vh;
+  overflow-y: auto;
+  text-align: right;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  bottom: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.history-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.history-panel p {
+  text-align: left;
+  color: var(--text-color);
+}
+
+.history-item {
+  margin-bottom: 20px;
+}
+
+.expr {
+  font-size: 1.2rem;
+  color: var(--sub-text-color);
+}
+
+.res {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.history-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+}
+
+.clear-history {
+  font-size: 1.3rem;
+  padding: 6px 8px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  color: var(--sub-text-color);
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clear-history:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--text-color);
+  transform: scale(1.1);
+}
+
+.clear-history:active {
+  transform: scale(0.95);
+}
+
+@media (max-width: 520px) {
+  .calculator-wrapper {
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+  }
+  .calculator {
+    width: 100%;
+    border-radius: 0;
+    height: 100%;
+    max-width: none;
+  }
+  button {
+    font-size: 1.8rem;
+    padding: 25px;
+  }
+  .history-panel {
+    max-width: 90%;
+  }
+}
+
+.current-operand.font-medium {
+  font-size: 2.5rem;
+}
+
+.current-operand.font-small {
+  font-size: 1.8rem;
+}
