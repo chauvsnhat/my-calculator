@@ -1,16 +1,22 @@
 :root {
-  --bg-color: #f0f2f5; /* Xám nhạt ấm áp */
-  --display-bg: #f5f7fa; /* Nhạt hơn một chút so với bg-color */
-  --button-bg: #e8ecef; /* Xám nhạt với chút xanh */
-  --button-hover-bg: #dfe3e8; /* Tương phản nhẹ khi hover */
-  --operator-bg: #d9e1e8; /* Xám nhạt xanh dương */
-  --operator-hover-bg: #c8d0d9; /* Tương phản khi hover */
-  --equals-bg: #004d99; /* Xanh dương đậm hơn */
-  --equals-hover-bg: #0066cc; /* Xanh dương sáng hơn khi hover */
+  --bg-color: #f0f2f5; 
+  --display-bg: #f5f7fa; 
+  --button-bg: #e8ecef; 
+  --button-hover-bg: #dfe3e8; 
+  --operator-bg: #d9e1e8; 
+  --operator-hover-bg: #c8d0d9; 
+  --equals-bg: #004d99; 
+  --equals-hover-bg: #0066cc; 
   --text-color: #0d0d0d;
   --sub-text-color: #5d5d5d;
   --button-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  --history-bg: #e0eaf1; /* Xanh dương nhạt hơn cho lịch sử */
+  --history-bg: #e0eaf1; 
+}
+
+/* THAY ĐỔI: Thiết lập chiều rộng body/html */
+html, body {
+  width: 100%; 
+  height: 100%;
 }
 
 body {
@@ -21,20 +27,20 @@ body {
   align-items: center;
   min-height: 100vh;
   background-color: #e2e2e2;
-  /* Đảm bảo không có scroll ngang */
   overflow-x: hidden; 
 }
 
 .calculator-wrapper {
   padding: 20px;
   position: relative;
-  /* Cho phép wrapper chiếm đủ chỗ để căn giữa */
   width: 100%; 
 }
 
 .calculator {
-  /* ĐÃ SỬA: Thay 'width' cố định bằng 'max-width' để giới hạn kích thước trên desktop */
+  min-width: 420px; 
   max-width: 580px; 
+  width: 100%; 
+  
   background-color: var(--bg-color);
   border-radius: 12px;
   box-shadow: 0 6px 40px rgba(0, 0, 0, 0.2);
@@ -42,7 +48,6 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  /* Căn giữa máy tính trên màn hình lớn */
   margin: 0 auto; 
 }
 
@@ -56,12 +61,10 @@ body {
   font-size: 1.2rem;
 }
 
-/* Loại bỏ kiểu button mặc định trong header */
 .header button {
   display: none;
 }
 
-/* Kiểu cho nút lịch sử với Font Awesome */
 .history-toggle {
   font-size: 1.2rem;
   padding: 6px 8px;
@@ -201,15 +204,15 @@ button.operator:hover {
   background-color: var(--history-bg);
   border-radius: 8px;
   padding: 20px;
-  width: 540px;
-  height: 500px;
+  width: 420px;
+  height: 400px;
   max-height: 100vh;
   overflow-y: auto;
   text-align: right;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: fixed;
   bottom: 45px;
-  left: 50%;
+  left: 51%;
   transform: translateX(-50%);
   margin-bottom: 0;
   display: flex;
@@ -283,40 +286,47 @@ button.operator:hover {
     width: 100vw;
   }
   
-  /* Máy tính chiếm 100% chiều rộng, loại bỏ giới hạn max-width */
+  /* Máy tính chiếm 100% chiều rộng, loại bỏ giới hạn max/min */
   .calculator {
     width: 100%;
     max-width: none; 
+    min-width: auto; 
     border-radius: 0;
     height: 100%;
-    box-shadow: none; /* Bỏ shadow trên mobile để trông gọn gàng hơn */
+    box-shadow: none; 
   }
   
-  /* Điều chỉnh kích thước hiển thị */
+  /* Điều chỉnh hiển thị */
   .display {
     padding: 20px;
     min-height: 100px;
   }
   
   .current-operand {
-    font-size: 3.2rem; /* Giảm kích thước chữ hiển thị */
+    font-size: 3.2rem; 
   }
 
   /* Điều chỉnh nút bấm */
   button {
-    font-size: 1.6rem; /* Giảm kích thước chữ nút bấm một chút */
+    font-size: 1.6rem; 
     padding: 22px 0; 
   }
 
-  /* Điều chỉnh lịch sử */
+  /* ĐÃ SỬA: Điều chỉnh lịch sử trên mobile */
   .history-panel {
-    /* Đảm bảo bảng lịch sử vừa vặn trên điện thoại */
     width: 95%; 
     max-width: 95%;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 0; /* Neo vào đáy màn hình */
-    height: 90vh; /* Chiếm phần lớn chiều cao màn hình */
+    
+    /* THAY ĐỔI: Sử dụng max-height để chừa khoảng trống bên trên */
+    height: auto; 
+    max-height: 80vh; 
+    
+    /* ĐẢM BẢO: Giữ bottom: 0 để neo vào đáy, nhưng sử dụng transition (không cần thiết trong CSS tĩnh) */
+    /* Quan trọng nhất là max-height: 80vh để không chiếm hết 100% màn hình */
+    bottom: 0; 
+    
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }

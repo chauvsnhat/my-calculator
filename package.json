@@ -3,14 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  
-  "homepage": "https://chauvsnhat.github.io/my-calculator", 
-  
+  "homepage": "https://chauvsnhat.github.io/my-calculator",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/my-calculator/", 
+    "build": "vite build", 
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist", 
+    "deploy": "gh-pages -d dist",
     "lint": "eslint .",
     "preview": "vite preview"
   },
