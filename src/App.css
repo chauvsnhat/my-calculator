@@ -249,32 +249,51 @@ button.operator:hover {
   align-self: flex-end;
 }
 
-@media (max-width: 520px) {
-  .history-panel {
-    width: 95%;
-    max-width: 95%;
-    height: auto;
-    max-height: 85vh;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 0;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    padding: 16px;
-    font-size: 1rem; /* tăng nhẹ cho dễ đọc */
-  }
-
-  .expr {
-    font-size: 1.4rem; /* tăng để dễ nhìn trên màn nhỏ */
-  }
-
-  .res {
-    font-size: 2.2rem;
-  }
-
-  .clear-history {
-    font-size: 1.5rem;
-  }
+/* @MEDIA QUERIES - Đảm bảo tính responsive */ 
+@media (max-width: 520px) { 
+  /* Body/Wrapper chiếm toàn bộ không gian trên mobile */ 
+  body { 
+    padding: 0; 
+    margin: 0; 
+  } 
+  .calculator-wrapper { padding: 0; height: 100vh; width: 100vw; } 
+  /* Máy tính chiếm 100% chiều rộng, loại bỏ giới hạn max/min */ 
+  .calculator { 
+    width: 100%; 
+    max-width: none; 
+    min-width: auto; 
+    border-radius: 0; 
+    height: 100%; 
+    box-shadow: none; 
+  } 
+    /* Điều chỉnh hiển thị */ 
+  .display { 
+      padding: 20px; 
+      min-height: 100px; 
+  } 
+  .current-operand { 
+      font-size: 3.2rem; 
+  } 
+    /* Điều chỉnh nút bấm */ 
+  button { 
+      font-size: 1.6rem; 
+      padding: 22px 0; 
+  } 
+  /* ĐÃ SỬA: Điều chỉnh lịch sử trên mobile */ 
+  .history-panel { 
+        width: 95%; 
+        max-width: 95%; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        /* THAY ĐỔI: Sử dụng max-height để chừa khoảng trống bên trên */ 
+        height: auto; 
+        max-height: 80vh; 
+        /* ĐẢM BẢO: Giữ bottom: 0 để neo vào đáy, nhưng sử dụng transition (không cần thiết trong CSS tĩnh) */ 
+        /* Quan trọng nhất là max-height: 80vh để không chiếm hết 100% màn hình */ 
+        bottom: 0; 
+        border-bottom-left-radius: 0; 
+        border-bottom-right-radius: 0; 
+  } 
 }
 
 /* Font-size co giãn khi quá dài */
