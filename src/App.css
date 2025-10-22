@@ -26,6 +26,14 @@ html, body {
   overflow-x: hidden;
 }
 
+/* ✅ Giảm toàn bộ giao diện về 80% để giống Chrome zoom 80% */
+body {
+  transform: scale(0.8);
+  transform-origin: top center;
+  width: 125%;
+  height: 125%;
+}
+
 /* ===== Khung chính ===== */
 .calculator-wrapper {
   width: 100%;
@@ -37,7 +45,7 @@ html, body {
   align-items: center;
 }
 
-/* ✅ FIXED: Calculator co giãn tự nhiên, ốm gọn hơn */
+/* ✅ Calculator co giãn tự nhiên */
 .calculator {
   width: clamp(280px, 88vw, 380px);
   background-color: var(--bg-color);
@@ -294,6 +302,15 @@ button.operator:hover {
     bottom: 0;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+  }
+}
+
+/* ✅ Tắt hiệu ứng thu nhỏ trên mobile */
+@media (max-width: 768px) {
+  body {
+    transform: none;
+    width: 100%;
+    height: auto;
   }
 }
 
