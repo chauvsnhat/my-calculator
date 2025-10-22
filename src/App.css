@@ -208,57 +208,72 @@ button.operator:hover {
 
 .history-panel {
   background-color: var(--history-bg);
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 20px;
-  width: 420px;
-  height: 400px;
-  max-height: 100vh;
+  width: 460px;
+  max-width: 90vw;
+  height: 420px;
   overflow-y: auto;
   text-align: right;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   position: fixed;
-  bottom: 45px;
+  bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
+  font-size: 1.1rem;
 }
 
-/* MOBILE VIEW */
-@media (max-width: 768px) {
-  .calculator {
-    width: 95vw;
-    max-width: none;
-    min-width: auto;
-    border-radius: 8px;
-    height: auto;
-    box-shadow: none;
-  }
+/* Mục trong lịch sử */
+.history-item {
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
 
-  .display {
-    padding: 20px;
-    min-height: 100px;
-  }
+.expr {
+  font-size: 1.3rem;
+  color: var(--sub-text-color);
+}
 
-  .current-operand {
-    font-size: 3rem;
-  }
+.res {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
 
-  button {
-    font-size: 1.6rem;
-    padding: 22px 0;
-  }
+/* Nút xóa */
+.clear-history {
+  font-size: 1.4rem;
+  margin-top: 5px;
+  align-self: flex-end;
+}
 
+@media (max-width: 520px) {
   .history-panel {
     width: 95%;
     max-width: 95%;
+    height: auto;
+    max-height: 85vh;
     left: 50%;
     transform: translateX(-50%);
-    height: auto;
-    max-height: 80vh;
     bottom: 0;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    padding: 16px;
+    font-size: 1rem; /* tăng nhẹ cho dễ đọc */
+  }
+
+  .expr {
+    font-size: 1.4rem; /* tăng để dễ nhìn trên màn nhỏ */
+  }
+
+  .res {
+    font-size: 2.2rem;
+  }
+
+  .clear-history {
+    font-size: 1.5rem;
   }
 }
 
