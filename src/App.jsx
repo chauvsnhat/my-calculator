@@ -206,22 +206,22 @@ function App() {
         }
         break;
       case '1/x':
-        if (displayExpression && (displayExpression.includes('1/') || displayExpression.includes('sqr') || displayExpression.includes('√') || displayExpression.includes('%'))) {
-          expr = `1/(${previousExpression || displayExpression})`;
-          if (current === 0) {
-            result = 'Error';
-          } else {
-            result = 1 / current;
-          }
+        if (current === 0) {
+          result = 'Error';
         } else {
-          expr = `1/(${currentOperand})`; // Dùng 1/() ngay từ đầu
-          if (current === 0) {
-            result = 'Error';
-          } else {
-            result = 1 / current;
-          }
+          result = 1 / current;
+        }
+        
+        // Nếu đang trong phép toán, thì hiển thị kèm phép toán hiện tại
+        if (previousOperand && operation) {
+          expr = `${previousOperand} ${operation} 1/(${currentOperand})`;
+        } else if (displayExpression && (displayExpression.includes('1/') || displayExpression.includes('sqr') || displayExpression.includes('√') || displayExpression.includes('%'))) {
+          expr = `1/(${previousExpression || displayExpression})`;
+        } else {
+          expr = `1/(${currentOperand})`;
         }
         break;
+        
       default:
         return;
     }
