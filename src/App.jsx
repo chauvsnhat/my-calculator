@@ -155,88 +155,69 @@ function App() {
   const handleUnaryOperator = (op) => {
     const current = parseFloat(currentOperand);
     if (isNaN(current) && op !== '±') return;
-
+  
     let expr = '';
     let result;
+  
+    // Nếu vừa bấm "=", thì reset biểu thức — coi kết quả là toán hạng mới
+    const baseOperand = isResult ? currentOperand : currentOperand;
+    const baseExpression = isResult ? '' : displayExpression;
+  
     switch (op) {
       case '%':
-        expr = `${currentOperand}%`;
+        expr = `${baseOperand}%`;
         const prev = parseFloat(previousOperand);
-        if (!isNaN(prev)) {
-          result = prev * (current / 100);
-        } else {
-          result = current / 100;
-        }
+        if (!isNaN(prev)) result = prev * (current / 100);
+        else result = current / 100;
         break;
+  
       case '±':
         if (currentOperand === '0' || currentOperand === '') {
           setCurrentOperand('-0');
           return;
         }
-        if (currentOperand.startsWith('-')) {
-          setCurrentOperand(currentOperand.substring(1));
-        } else {
-          setCurrentOperand(`-${currentOperand}`);
-        }
+        setCurrentOperand(currentOperand.startsWith('-')
+          ? currentOperand.substring(1)
+          : `-${currentOperand}`);
         return;
+  
       case '√x':
-        if (displayExpression && (displayExpression.includes('√') || displayExpression.includes('sqr') || displayExpression.includes('1/') || displayExpression.includes('%'))) {
-          expr = `√(${previousExpression || displayExpression})`;
-          if (current < 0) {
-            result = 'Error';
-          } else {
-            result = Math.sqrt(current);
-          }
-        } else {
-          expr = `√(${currentOperand})`;
-          if (current < 0) {
-            result = 'Error';
-          } else {
-            result = Math.sqrt(current);
-          }
-        }
+        expr = `√(${baseOperand})`;
+        result = current < 0 ? 'Error' : Math.sqrt(current);
         break;
+  
       case 'x²':
-        if (displayExpression && (displayExpression.includes('sqr') || displayExpression.includes('√') || displayExpression.includes('1/') || displayExpression.includes('%'))) {
-          expr = `sqr(${previousExpression || displayExpression})`;
-          result = Math.pow(current, 2); // Tính lũy thừa tiếp
-        } else {
-          expr = `sqr(${currentOperand})`; // Dùng sqr() ngay từ đầu
-          result = Math.pow(current, 2);
-        }
+        expr = `sqr(${baseOperand})`;
+        result = Math.pow(current, 2);
         break;
+  
       case '1/x':
         if (current === 0) {
           result = 'Error';
         } else {
           result = 1 / current;
         }
-        
-        // Nếu đang trong phép toán, thì hiển thị kèm phép toán hiện tại
-        if (previousOperand && operation) {
-          expr = `${previousOperand} ${operation} 1/(${currentOperand})`;
-        } else if (displayExpression && (displayExpression.includes('1/') || displayExpression.includes('sqr') || displayExpression.includes('√') || displayExpression.includes('%'))) {
-          expr = `1/(${previousExpression || displayExpression})`;
-        } else {
-          expr = `1/(${currentOperand})`;
-        }
+        expr = `1/(${baseOperand})`;
         break;
-        
+  
       default:
         return;
     }
+  
     if (result === 'Error') {
       setCurrentOperand('Error');
       setDisplayExpression('');
-      setPreviousExpression(''); // Reset khi lỗi
+      setPreviousExpression('');
       setIsResult(false);
       return;
     }
+  
     setDisplayExpression(expr);
-    setPreviousExpression(expr); // Lưu biểu thức hiện tại để lồng khi bấm tiếp
+    setPreviousExpression(expr);
     setCurrentOperand(result.toString());
-    setIsResult(true);
+    setIsResult(true); // ✅ Đánh dấu là vừa ra kết quả
   };
+  
 
   const handleMemory = (type) => {
     const current = parseFloat(currentOperand);
