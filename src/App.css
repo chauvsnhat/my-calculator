@@ -1,21 +1,21 @@
 :root {
-  --bg-color: #f0f2f5; 
-  --display-bg: #f5f7fa; 
-  --button-bg: #e8ecef; 
-  --button-hover-bg: #dfe3e8; 
-  --operator-bg: #d9e1e8; 
-  --operator-hover-bg: #c8d0d9; 
-  --equals-bg: #004d99; 
-  --equals-hover-bg: #0066cc; 
+  --bg-color: #f0f2f5;
+  --display-bg: #f5f7fa;
+  --button-bg: #e8ecef;
+  --button-hover-bg: #dfe3e8;
+  --operator-bg: #d9e1e8;
+  --operator-hover-bg: #c8d0d9;
+  --equals-bg: #004d99;
+  --equals-hover-bg: #0066cc;
   --text-color: #0d0d0d;
   --sub-text-color: #5d5d5d;
   --button-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  --history-bg: #e0eaf1; 
+  --history-bg: #e0eaf1;
 }
 
-/* THAY ĐỔI: Thiết lập chiều rộng body/html */
+/* Thiết lập tổng thể */
 html, body {
-  width: 100%; 
+  width: 100%;
   height: 100%;
 }
 
@@ -27,20 +27,25 @@ body {
   align-items: center;
   min-height: 100vh;
   background-color: #e2e2e2;
-  overflow-x: hidden; 
+  overflow-x: hidden;
 }
 
 .calculator-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100vw;
   padding: 20px;
-  position: relative;
-  width: 100%; 
+  box-sizing: border-box;
 }
 
+/* ✅ CHỈNH PHẦN NÀY ĐỂ FIX LỖI RESPONSIVE */
 .calculator {
-  min-width: 420px; 
-  max-width: 580px; 
-  width: 100%; 
-  
+  width: 90vw;
+  max-width: 420px;
+  min-width: 320px;
+
   background-color: var(--bg-color);
   border-radius: 12px;
   box-shadow: 0 6px 40px rgba(0, 0, 0, 0.2);
@@ -48,9 +53,10 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
 
+/* HEADER */
 .header {
   display: flex;
   align-items: center;
@@ -61,10 +67,12 @@ body {
   font-size: 1.2rem;
 }
 
+/* Ẩn nút không cần thiết */
 .header button {
   display: none;
 }
 
+/* Lịch sử */
 .history-toggle {
   font-size: 1.2rem;
   padding: 6px 8px;
@@ -83,10 +91,6 @@ body {
   background-color: rgba(0, 0, 0, 0.05);
   color: var(--text-color);
   transform: scale(1.1);
-}
-
-.history-toggle:active {
-  transform: scale(0.95);
 }
 
 .display {
@@ -147,6 +151,7 @@ body {
   border-radius: 4px;
 }
 
+/* GRID NÚT */
 .buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -187,6 +192,7 @@ button.operator:hover {
   background-color: var(--equals-hover-bg);
 }
 
+/* PANEL LỊCH SỬ */
 .history-overlay {
   position: fixed;
   top: 0;
@@ -212,127 +218,51 @@ button.operator:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: fixed;
   bottom: 45px;
-  left: 51%;
+  left: 50%;
   transform: translateX(-50%);
-  margin-bottom: 0;
   display: flex;
   flex-direction: column;
 }
 
-.history-content {
-  flex: 1;
-  overflow-y: auto;
-}
-
-.history-panel p {
-  text-align: left;
-  color: var(--text-color);
-}
-
-.history-item {
-  margin-bottom: 20px;
-}
-
-.expr {
-  font-size: 1.2rem;
-  color: var(--sub-text-color);
-}
-
-.res {
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-
-.history-footer {
-  display: flex;
-  justify-content: flex-end;
-  padding-top: 10px;
-}
-
-.clear-history {
-  font-size: 1.3rem;
-  padding: 6px 8px;
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  border-radius: 4px;
-  color: var(--sub-text-color);
-  transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.clear-history:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  color: var(--text-color);
-  transform: scale(1.1);
-}
-
-.clear-history:active {
-  transform: scale(0.95);
-}
-
-/* @MEDIA QUERIES - Đảm bảo tính responsive */
-@media (max-width: 520px) {
-  /* Body/Wrapper chiếm toàn bộ không gian trên mobile */
-  body {
-    padding: 0;
-    margin: 0;
-  }
-  .calculator-wrapper {
-    padding: 0;
-    height: 100vh;
-    width: 100vw;
-  }
-  
-  /* Máy tính chiếm 100% chiều rộng, loại bỏ giới hạn max/min */
+/* MOBILE VIEW */
+@media (max-width: 768px) {
   .calculator {
-    width: 100%;
-    max-width: none; 
-    min-width: auto; 
-    border-radius: 0;
-    height: 100%;
-    box-shadow: none; 
+    width: 95vw;
+    max-width: none;
+    min-width: auto;
+    border-radius: 8px;
+    height: auto;
+    box-shadow: none;
   }
-  
-  /* Điều chỉnh hiển thị */
+
   .display {
     padding: 20px;
     min-height: 100px;
   }
-  
+
   .current-operand {
-    font-size: 3.2rem; 
+    font-size: 3rem;
   }
 
-  /* Điều chỉnh nút bấm */
   button {
-    font-size: 1.6rem; 
-    padding: 22px 0; 
+    font-size: 1.6rem;
+    padding: 22px 0;
   }
 
-  /* ĐÃ SỬA: Điều chỉnh lịch sử trên mobile */
   .history-panel {
-    width: 95%; 
+    width: 95%;
     max-width: 95%;
     left: 50%;
     transform: translateX(-50%);
-    
-    /* THAY ĐỔI: Sử dụng max-height để chừa khoảng trống bên trên */
-    height: auto; 
-    max-height: 80vh; 
-    
-    /* ĐẢM BẢO: Giữ bottom: 0 để neo vào đáy, nhưng sử dụng transition (không cần thiết trong CSS tĩnh) */
-    /* Quan trọng nhất là max-height: 80vh để không chiếm hết 100% màn hình */
-    bottom: 0; 
-    
+    height: auto;
+    max-height: 80vh;
+    bottom: 0;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
 }
 
-/* Các lớp CSS cho kích thước chữ display */
+/* Font-size co giãn khi quá dài */
 .current-operand.font-medium {
   font-size: 2.5rem;
 }
