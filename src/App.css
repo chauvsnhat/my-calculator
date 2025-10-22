@@ -13,7 +13,7 @@
   --history-bg: #e0eaf1;
 }
 
-/* Thiết lập tổng thể */
+/* 🌐 Thiết lập tổng thể */
 html, body {
   width: 100%;
   height: 100%;
@@ -40,12 +40,11 @@ body {
   box-sizing: border-box;
 }
 
-/* ✅ CHỈNH PHẦN NÀY ĐỂ FIX LỖI RESPONSIVE */
+/* ✅ FIX RESPONSIVE CHO DESKTOP */
 .calculator {
-  width: 90vw;
+  width: 100%;
   max-width: 420px;
   min-width: 320px;
-
   background-color: var(--bg-color);
   border-radius: 12px;
   box-shadow: 0 6px 40px rgba(0, 0, 0, 0.2);
@@ -56,7 +55,7 @@ body {
   margin: 0 auto;
 }
 
-/* HEADER */
+/* 🧭 HEADER */
 .header {
   display: flex;
   align-items: center;
@@ -72,7 +71,7 @@ body {
   display: none;
 }
 
-/* Lịch sử */
+/* 🔄 Nút hiển thị lịch sử */
 .history-toggle {
   font-size: 1.2rem;
   padding: 6px 8px;
@@ -93,6 +92,7 @@ body {
   transform: scale(1.1);
 }
 
+/* 🖥️ DISPLAY */
 .display {
   position: relative;
   background-color: var(--display-bg);
@@ -132,6 +132,7 @@ body {
   transition: font-size 0.2s ease-in-out;
 }
 
+/* 💾 MEMORY ROW */
 .memory-row {
   display: flex;
   justify-content: space-around;
@@ -151,7 +152,7 @@ body {
   border-radius: 4px;
 }
 
-/* GRID NÚT */
+/* 🔢 GRID NÚT */
 .buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -192,7 +193,7 @@ button.operator:hover {
   background-color: var(--equals-hover-bg);
 }
 
-/* PANEL LỊCH SỬ */
+/* 🧾 PANEL LỊCH SỬ */
 .history-overlay {
   position: fixed;
   top: 0;
@@ -225,7 +226,7 @@ button.operator:hover {
   font-size: 1.1rem;
 }
 
-/* Mục trong lịch sử */
+/* Lịch sử item */
 .history-item {
   margin-bottom: 16px;
   line-height: 1.4;
@@ -242,61 +243,63 @@ button.operator:hover {
   color: var(--text-color);
 }
 
-/* Nút xóa */
+/* Nút xoá lịch sử */
 .clear-history {
   font-size: 1.4rem;
   margin-top: 5px;
   align-self: flex-end;
 }
 
-/* @MEDIA QUERIES - Đảm bảo tính responsive */ 
-@media (max-width: 520px) { 
-  /* Body/Wrapper chiếm toàn bộ không gian trên mobile */ 
-  body { 
-    padding: 0; 
-    margin: 0; 
-  } 
-  .calculator-wrapper { padding: 0; height: 100vh; width: 100vw; } 
-  /* Máy tính chiếm 100% chiều rộng, loại bỏ giới hạn max/min */ 
-  .calculator { 
-    width: 100%; 
-    max-width: none; 
-    min-width: auto; 
-    border-radius: 0; 
-    height: 100%; 
-    box-shadow: none; 
-  } 
-    /* Điều chỉnh hiển thị */ 
-  .display { 
-      padding: 20px; 
-      min-height: 100px; 
-  } 
-  .current-operand { 
-      font-size: 3.2rem; 
-  } 
-    /* Điều chỉnh nút bấm */ 
-  button { 
-      font-size: 1.6rem; 
-      padding: 22px 0; 
-  } 
-  /* ĐÃ SỬA: Điều chỉnh lịch sử trên mobile */ 
-  .history-panel { 
-        width: 95%; 
-        max-width: 95%; 
-        left: 50%; 
-        transform: translateX(-50%); 
-        /* THAY ĐỔI: Sử dụng max-height để chừa khoảng trống bên trên */ 
-        height: auto; 
-        max-height: 80vh; 
-        /* ĐẢM BẢO: Giữ bottom: 0 để neo vào đáy, nhưng sử dụng transition (không cần thiết trong CSS tĩnh) */ 
-        /* Quan trọng nhất là max-height: 80vh để không chiếm hết 100% màn hình */ 
-        bottom: 0; 
-        border-bottom-left-radius: 0; 
-        border-bottom-right-radius: 0; 
-  } 
+/* 📱 MEDIA QUERY CHO MOBILE */
+@media (max-width: 520px) {
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
+  .calculator-wrapper {
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .calculator {
+    width: 100%;
+    max-width: none;
+    min-width: auto;
+    border-radius: 0;
+    height: 100%;
+    box-shadow: none;
+  }
+
+  .display {
+    padding: 20px;
+    min-height: 100px;
+  }
+
+  .current-operand {
+    font-size: 3.2rem;
+  }
+
+  button {
+    font-size: 1.6rem;
+    padding: 22px 0;
+  }
+
+  .history-panel {
+    width: 95%;
+    max-width: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: auto;
+    max-height: 80vh;
+    bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
 }
 
-/* Font-size co giãn khi quá dài */
+/* 🔤 Co giãn font khi số quá dài */
 .current-operand.font-medium {
   font-size: 2.5rem;
 }
